@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import StatCard from "./StatCard";
 import RecentMembers from './RecentMembers';
 import DashboardSchedules from './DashboardSchedules';
-import ActiveUsersChart from './ActiveUsersChart';
+
 import axios from 'axios';
 
 export default function AdminDashboard() {
@@ -146,7 +146,7 @@ export default function AdminDashboard() {
         <DashboardSchedules />
       </div>
 
-      <ActiveUsersChart data={activeUserChartData} />
+
     </div>
   );
 }

@@ -1,21 +1,19 @@
-// DietList.jsx
 import React from 'react';
 import DietCard from './DietCard';
 
 const DietList = ({ diets }) => {
-  const userEmail = localStorage.getItem('email');
-  const role = localStorage.getItem('role');
-
-  const filteredDiets = diets.filter(diet => {
-    if (role === 'admin') return true;
-    return diet.sharedWith === 'all' || diet.sharedWith === userEmail;
-  });
-
   return (
-    <div style={{ marginTop: '20px' }}>
-      {filteredDiets.map((diet, index) => (
-        <DietCard key={index} diet={diet} />
-      ))}
+    <div>
+      <h3 className="text-xl font-semibold mb-4">Assigned Diets</h3>
+      {diets.length === 0 ? (
+        <p className="text-gray-500">No diets assigned yet.</p>
+      ) : (
+        <div className="space-y-4">
+          {diets.map(diet => (
+            <DietCard key={diet._id} diet={diet} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

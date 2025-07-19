@@ -44,14 +44,14 @@ const About = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white py-20">
-        <div className="absolute inset-0 bg-black/20"></div>
+      <div className="relative bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white  py-20">
+        <div className="absolute inset-0  bg-black/20"></div>
         {/* Background Image */}
-        <div className="absolute inset-0 opacity-20">
-          <img 
+        <div className="absolute inset-0  opacity-20">
+          <img
             src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
             alt="Modern gym interior"
-            className="w-full h-full object-cover"
+            className="w-full h-full ml-[5px] object-cover"
           />
         </div>
         <div className="container mx-auto px-6 relative z-10">
@@ -65,7 +65,7 @@ const About = () => {
               About FitManager Pro
             </h1>
             <p className="text-xl text-gray-100 leading-relaxed max-w-3xl mx-auto">
-              Empowering fitness journeys through cutting-edge technology and personalized experiences. 
+              Empowering fitness journeys through cutting-edge technology and personalized experiences.
               Your ultimate companion for achieving health and wellness goals.
             </p>
           </div>
@@ -101,11 +101,11 @@ const About = () => {
               <div>
                 <h2 className="text-4xl font-bold text-gray-800 mb-6">Our Mission</h2>
                 <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                  To revolutionize the fitness industry by providing intelligent, user-friendly gym management 
+                  To revolutionize the fitness industry by providing intelligent, user-friendly gym management
                   solutions that enhance both member experience and business operations.
                 </p>
                 <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                  We believe fitness should be accessible, enjoyable, and results-driven. Our platform 
+                  We believe fitness should be accessible, enjoyable, and results-driven. Our platform
                   combines advanced technology with human expertise to create personalized fitness experiences.
                 </p>
                 <div className="flex items-center space-x-4">
@@ -151,7 +151,7 @@ const About = () => {
               {/* Team Member 1 */}
               <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
                 <div className="relative h-64">
-                  <img 
+                  <img
                     src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
                     alt="Head Trainer"
                     className="w-full h-full object-cover"
@@ -170,7 +170,7 @@ const About = () => {
               {/* Team Member 2 */}
               <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
                 <div className="relative h-64">
-                  <img 
+                  <img
                     src="https://www.imageskart.in/fotocrats?imagepath=SU1LMTAwMDAzODQyMTQuanBn"
                     alt="Yoga Instructor"
                     className="w-full h-full object-cover"
@@ -189,7 +189,7 @@ const About = () => {
               {/* Team Member 3 */}
               <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
                 <div className="relative h-64">
-                  <img 
+                  <img
                     src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
                     alt="Fitness Coach"
                     className="w-full h-full object-cover"
@@ -252,7 +252,7 @@ const About = () => {
               {/* Facility 1 */}
               <div className="group overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <div className="relative h-64">
-                  <img 
+                  <img
                     src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
                     alt="Weight Training Area"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
@@ -268,7 +268,7 @@ const About = () => {
               {/* Facility 2 */}
               <div className="group overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <div className="relative h-64">
-                  <img 
+                  <img
                     src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
                     alt="Cardio Zone"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
@@ -284,7 +284,7 @@ const About = () => {
               {/* Facility 3 */}
               <div className="group overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <div className="relative h-64">
-                  <img 
+                  <img
                     src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
                     alt="Yoga Studio"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
@@ -300,7 +300,7 @@ const About = () => {
               {/* Facility 4 */}
               <div className="group overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <div className="relative h-64">
-                  <img 
+                  <img
                     src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
                     alt="Group Classes"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
@@ -316,7 +316,7 @@ const About = () => {
               {/* Facility 5 */}
               <div className="group overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <div className="relative h-64">
-                  <img 
+                  <img
                     src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
                     alt="Locker Rooms"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
@@ -332,7 +332,7 @@ const About = () => {
               {/* Facility 6 */}
               <div className="group overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <div className="relative h-64">
-                  <img 
+                  <img
                     src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
                     alt="Personal Training"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"

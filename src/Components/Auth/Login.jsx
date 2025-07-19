@@ -19,13 +19,14 @@ export default function Login() {
     e.preventDefault();
     try {
       const res = await axios.post('http://localhost:5000/api/auth/login', form);
-      console.log(res.data);
-      const { token } = res.data;
-      const { role } = res.data.user;
-      localStorage.setItem('token', token);
-      localStorage.setItem('role', role);
+      const { token, user } = res.data;
 
-      toast.success(`${role === 'admin' ? 'Admin' : 'User'} login successful`, {
+      // Save in localStorage
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', user.role);
+      localStorage.setItem('name', user.name); // ✅ Store name
+
+      toast.success(`${user.role === 'admin' ? 'Admin' : 'User'} login successful`, {
         position: 'top-right',
         autoClose: 2000,
         onClose: () => {

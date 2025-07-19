@@ -3,28 +3,29 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import {
-  Bell, User, Settings, LogOut, ChevronDown, Clock, X,
+  Bell, User, Settings, LogOut, ChevronDown, Clock, X, Menu,
   CheckCircle, AlertCircle, AlertTriangle, Info, Calculator
 } from 'lucide-react';
 
-export default function Navbar({ user, setCurrentView }) {
+export default function Navbar({ setCurrentView, toggleSidebar }) {
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [notifications, setNotifications] = useState([]);
+  const [userName, setUserName] = useState('');
   const router = useRouter();
   const dropdownRef = useRef();
   const notificationRef = useRef();
+
+  useEffect(() => {
+    const name = localStorage.getItem('name');
+    if (name) setUserName(name);
+  }, []);
 
   const fetchNotifications = async () => {
     try {
       const res = await fetch('http://localhost:5000/api/notifications');
       const data = await res.json();
-      if (Array.isArray(data)) {
-        setNotifications(data);
-      } else {
-        console.error('Invalid notifications response:', data);
-        setNotifications([]);
-      }
+      setNotifications(Array.isArray(data) ? data : []);
     } catch (err) {
       console.error('Failed to fetch notifications:', err);
     }
@@ -36,7 +37,7 @@ export default function Navbar({ user, setCurrentView }) {
     return () => clearInterval(interval);
   }, []);
 
-  const unreadCount = Array.isArray(notifications) ? notifications.filter(n => !n.isRead).length : 0;
+  const unreadCount = notifications.filter(n => !n.isRead).length;
 
   const getNotificationIcon = (type) => {
     switch (type) {
@@ -71,16 +72,16 @@ export default function Navbar({ user, setCurrentView }) {
   };
 
   return (
-    <nav className="bg-gray-800 text-white px-6 py-4 flex justify-between items-center shadow sticky top-0 z-30 mb-[-65px]" style={{ marginLeft: '258px' }}>
-      <div className="flex flex-col">
-        <h1 className="text-xl font-bold">🏋️‍♂️ FitTrack Gym Management</h1>
-        <p className="text-xs text-gray-300 flex items-center gap-1">
-          <Clock className="w-4 h-4" />
-          {new Date().toLocaleString('en-IN', {
-            weekday: 'long', year: 'numeric', month: 'long',
-            day: 'numeric', hour: '2-digit', minute: '2-digit'
-          })}
-        </p>
+    <nav className="bg-gray-800 text-white px-4 py-4 flex justify-between items-center shadow sticky top-0 z-30">
+      <div className="flex items-center gap-4">
+        {/* Hamburger toggle button */}
+        <button onClick={toggleSidebar} className="md:hidden text-white hover:text-purple-300">
+          <Menu className="w-6 h-6" />
+        </button>
+        {/* Welcome message */}
+        <span className="hidden sm:inline text-sm font-medium">
+         <span className=" text-2xl"> Welcome, </span> <span className="text-purple-400 text-2xl">{userName || 'User'}</span>
+        </span>
       </div>
 
       <div className="flex items-center gap-4 relative">
@@ -98,7 +99,6 @@ export default function Navbar({ user, setCurrentView }) {
               </span>
             )}
           </button>
-
           {isNotificationOpen && (
             <div className="absolute right-0 mt-2 w-80 bg-gray-900 rounded shadow-lg border border-gray-700 z-50">
               <div className="p-3 border-b border-gray-700 flex justify-between items-center">
@@ -133,7 +133,7 @@ export default function Navbar({ user, setCurrentView }) {
           <Calculator className="w-5 h-5" />
         </button>
 
-        {/* Profile Dropdown on Hover */}
+        {/* Profile dropdown */}
         <div
           className="relative"
           ref={dropdownRef}
@@ -142,7 +142,7 @@ export default function Navbar({ user, setCurrentView }) {
         >
           <button className="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full hover:opacity-90 transition">
             <User className="w-4 h-4" />
-            <span className="hidden sm:block text-sm font-medium">{user?.name || 'Admin'}</span>
+            <span className="hidden sm:block text-sm font-medium">{userName || 'Admin'}</span>
             <ChevronDown className="w-4 h-4" />
           </button>
 
@@ -154,10 +154,6 @@ export default function Navbar({ user, setCurrentView }) {
             </div>
           )}
         </div>
-
-        <button onClick={handleLogout} className="flex items-center gap-3 p-3 rounded-xl text-sm font-medium text-red-300 hover:bg-red-500/20 transition-all duration-150">
-          <LogOut size={18} />
-        </button>
       </div>
     </nav>
   );

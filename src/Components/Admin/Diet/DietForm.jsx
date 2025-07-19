@@ -1,51 +1,123 @@
-// DietForm.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
-const DietForm = ({ onAddDiet }) => {
-  const [showForm, setShowForm] = useState(false);
-  const [diet, setDiet] = useState({
-    name: '',
-    calories: '',
-    category: '',
-    sharedWith: ''
-  });
+const DietForm = ({ onSuccess }) => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [userIds, setUserIds] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
-  const role = localStorage.getItem('role');
+  useEffect(() => {
+    const fetchUsers = async () => {
+      setLoading(true);
+      try {
+        const res = await axios.get('http://localhost:5000/api/auth/users');
+        setUsers(res.data);
+        setFiltered(res.data);
+      } catch (err) {
+        console.error('Failed to fetch users:', err);
+        toast.error('Error fetching users');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (role !== 'admin') return null;
+    fetchUsers();
+  }, []);
 
-  const handleToggleForm = () => {
-    setShowForm(!showForm);
-  };
-
-  const handleChange = (e) => {
-    setDiet({ ...diet, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (onAddDiet) {
-      onAddDiet(diet);
+    if (!title || !description || userIds.length === 0) {
+      setError('All fields are required and at least one user must be selected.');
+      return;
     }
-    setDiet({ name: '', calories: '', category: '', sharedWith: '' });
-    setShowForm(false);
+
+    try {
+      setSubmitting(true);
+      await axios.post('http://localhost:5000/api/diets', {
+        title,
+        description,
+        userIds, // This will be mapped to 'users' in backend
+      });
+      setTitle('');
+      setDescription('');
+      setUserIds([]);
+      setError('');
+      onSuccess?.();
+      toast.success('✅ Diet assigned successfully!');
+    } catch (err) {
+      console.error(err);
+      setError('Failed to assign diet.');
+      toast.error('Failed to assign diet.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
-    <div>
-      <button onClick={handleToggleForm} style={{ backgroundColor: '#1E90FF', color: 'white', padding: '10px', border: 'none', borderRadius: '4px' }}>
-        {showForm ? 'Close Form' : 'Add Diet'}
-      </button>
+    <div className="bg-white shadow-md rounded-xl p-6 max-w-md mx-auto mt-6">
+      <h2 className="text-xl font-bold mb-4 text-center">📋 Assign Diet Plan</h2>
 
-      {showForm && (
-        <form onSubmit={handleSubmit} style={{ marginTop: '10px' }}>
-          <input name="name" type="text" placeholder="Diet Name" value={diet.name} onChange={handleChange} required /><br />
-          <input name="calories" type="number" placeholder="Calories" value={diet.calories} onChange={handleChange} required /><br />
-          <input name="category" type="text" placeholder="Category" value={diet.category} onChange={handleChange} required /><br />
-          <input name="sharedWith" type="text" placeholder='Share with (user email or "all")' value={diet.sharedWith} onChange={handleChange} required /><br />
-          <button type="submit" style={{ marginTop: '10px', backgroundColor: '#1E90FF', color: 'white', padding: '10px', border: 'none', borderRadius: '4px' }}>Add Diet</button>
-        </form>
+      {error && (
+        <div className="bg-red-100 text-red-700 px-4 py-2 rounded mb-4">
+          {error}
+        </div>
       )}
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input
+          type="text"
+          className="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Title (e.g., Keto Plan)"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+
+        <textarea
+          className="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          rows="4"
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+
+        <div>
+          <label className="block mb-2 font-medium">Assign to Users:</label>
+          {loading ? (
+            <p className="text-sm text-gray-500">Loading users...</p>
+          ) : (
+            <select
+              multiple
+              value={userIds}
+              onChange={(e) =>
+                setUserIds(Array.from(e.target.selectedOptions, (o) => o.value))
+              }
+              className="w-full h-32 border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              {filtered.map((user) => (
+                <option value={user._id} key={user._id}>
+                  {user.name}
+                </option>
+              ))}
+            </select>
+          )}
+        </div>
+
+        <button
+          type="submit"
+          disabled={submitting}
+          className={`w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition ${
+            submitting ? 'opacity-50 cursor-not-allowed' : ''
+          }`}
+        >
+          {submitting ? 'Assigning...' : 'Assign Diet'}
+        </button>
+      </form>
     </div>
   );
 };

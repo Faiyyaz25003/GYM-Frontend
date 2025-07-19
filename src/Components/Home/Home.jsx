@@ -16,16 +16,19 @@ import ContactData from '../Admin/Contact/ContactData';
 import UserDetails from '../Admin/UserDetails/UserDetails';
 import Profile from '../Admin/Profile/Profile';
 import Acheivements from '../Admin/Acheivements/Acheivements';
-import DietManager from '../Admin/Diet/DietForm';
+import DietManager from '../Admin/Diet/Diet';
 import UserDashboard from '../UserDashboard/USerDashboard';
 import Diet from '../Admin/Diet/Diet';
 import Calculator from '../Admin/Calculator/Calculator';
-import Notification from '../Admin/Notification/Notification'; // ✅ Import Notification
-import ExpireMember from '../Admin/ExpireMember/ExpireMember';
+import Notification from '../Admin/Notification/Notification';
+import Expire from '../Admin/Expire/Expire';
+import DietReference from '../Admin/DietReference/DietReference';
+import ExcersizeReference from '../Admin/ExcersizeReference/ExcersizeReference';
 
 export default function Home() {
   const [role, setRole] = useState('');
   const [currentView, setCurrentView] = useState('dashboard');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     const storedRole = localStorage.getItem('role');
@@ -43,19 +46,21 @@ export default function Home() {
         case 'dashboard': return <AdminDashboard />;
         case 'members': return <Member />;
         case 'trainers': return <Trainee />;
-        case 'acheivements': return <Acheivements />;
         case 'schedule': return <Schedule />;
         case 'plans': return <Plan />;
         case 'about': return <About />;
         case 'userDetails': return <UserDetails />;
         case 'contact': return <Contact />;
         case 'contactData': return <ContactData />;
-        case 'profile': return <Profile />;
         case 'diet': return <DietManager />;
         case 'calculator': return <Calculator />;
-        case 'notification': return <Notification />; // ✅ Show in main content
-        case 'expireMember': return <ExpireMember />;
-        default: return <ExpireMember />;
+        case 'notification': return <Notification />;
+        case 'expire': return <Expire />;
+        case 'achievements': return <Acheivements />;
+        case 'dietReference': return <DietReference />;
+        case 'excersizeReference': return <ExcersizeReference />;
+        case 'admin-profile': return <Profile />;
+        default: return <AdminDashboard />;
       }
     } else if (role === 'user') {
       switch (currentView) {
@@ -63,14 +68,16 @@ export default function Home() {
         case 'schedule': return <Schedule />;
         case 'trainers': return <Trainee />;
         case 'plans': return <Plan />;
-        case 'support': return <div>User Support</div>;
         case 'about': return <About />;
         case 'contact': return <Contact />;
-        case 'acheivement': return <Acheivements />;
-        case 'profile': return <Profile />;
+        case 'achievements': return <Acheivements />;
+        case 'user-profile': return <Profile />;
         case 'diet': return <Diet />;
         case 'calculator': return <Calculator />;
-        default: return <Acheivements />;
+        case 'dietReference': return <DietReference />;
+        case 'notification': return <Notification />;
+        case 'excersizeReference': return <ExcersizeReference />;
+        default: return <UserDashboard />;
       }
     } else {
       return (
@@ -82,12 +89,24 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <Sidebar currentView={currentView} setCurrentView={setCurrentView} user={user} />
-      <Navbar user={user} setCurrentView={setCurrentView} />
-      <main className="ml-64 mt-16 p-6 bg-gray-100 min-h-screen">
-        {renderPage()}
-      </main>
+    <div className="flex h-screen overflow-hidden">
+      {/* Sidebar */}
+      <div className={`fixed inset-y-0 left-0 z-30 w-64 transform bg-white border-r transition-transform duration-200 ease-in-out 
+        ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
+        md:translate-x-0 md:static md:inset-0`}>
+        <Sidebar currentView={currentView} setCurrentView={setCurrentView} user={user} />
+      </div>
+
+      {/* Main content area */}
+      <div className="flex-1 flex flex-col overflow-hidden w-full">
+        {/* Navbar */}
+        <Navbar user={user} setCurrentView={setCurrentView} onMenuToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
+
+        {/* Content */}
+        <main className="flex-1 overflow-y-auto  bg-gray-100">
+          {renderPage()}
+        </main>
+      </div>
     </div>
   );
 }

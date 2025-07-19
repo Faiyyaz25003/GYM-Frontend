@@ -59,7 +59,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MemberCard from '../Members/MemberCard'; // UI card for member
 
-const ExpireMember = () => {
+const Expire = () => {
   const [expiringMembers, setExpiringMembers] = useState([]);
   const [searchTerm, setSearchTerm] = useState(''); // ✅ for filtering
 
@@ -121,4 +121,4 @@ const ExpireMember = () => {
   );
 };
 
-export default ExpireMember;
+export default Expire;

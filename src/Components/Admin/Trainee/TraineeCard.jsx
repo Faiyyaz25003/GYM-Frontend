@@ -1,6 +1,6 @@
 
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Pencil,
   Trash,
@@ -12,6 +12,15 @@ import {
 } from 'lucide-react';
 
 const TraineeCard = ({ trainee, onEdit, onDelete }) => {
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const role = localStorage.getItem('role');
+    if (role === 'admin') {
+      setIsAdmin(true);
+    }
+  }, []);
+
   return (
     <div className="bg-gradient-to-br from-purple-50 to-white rounded-xl shadow-xl p-6 w-full max-w-sm mx-auto border border-gray-200 hover:shadow-2xl transition-all duration-300">
       
@@ -59,21 +68,23 @@ const TraineeCard = ({ trainee, onEdit, onDelete }) => {
         </p>
       </div>
 
-      {/* Action Buttons */}
-      <div className="flex justify-center gap-4 mt-6">
-        <button
-          onClick={() => onEdit(trainee)}
-          className="flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow"
-        >
-          <Pencil size={16} /> Edit
-        </button>
-        <button
-          onClick={() => onDelete(trainee._id)}
-          className="flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md shadow"
-        >
-          <Trash size={16} /> Delete
-        </button>
-      </div>
+      {/* Action Buttons - only for admin */}
+      {isAdmin && (
+        <div className="flex justify-center gap-4 mt-6">
+          <button
+            onClick={() => onEdit(trainee)}
+            className="flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow"
+          >
+            <Pencil size={16} /> Edit
+          </button>
+          <button
+            onClick={() => onDelete(trainee._id)}
+            className="flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md shadow"
+          >
+            <Trash size={16} /> Delete
+          </button>
+        </div>
+      )}
     </div>
   );
 };
