@@ -2,8 +2,6 @@ import React from 'react'
 
 import Login from '@/Components/Auth/Login';
 
-
-
 const page = () => {
   return (
     <div>
@@ -13,3 +11,4 @@ const page = () => {
   )
 }
 export default page;
+
