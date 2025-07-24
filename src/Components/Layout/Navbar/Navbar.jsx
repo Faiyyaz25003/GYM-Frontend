@@ -72,7 +72,7 @@ export default function Navbar({ setCurrentView, toggleSidebar }) {
   };
 
   return (
-    <nav className="bg-gray-800 text-white px-4 py-4 flex justify-between items-center shadow sticky top-0 z-30">
+    <nav className="bg-gray-800 text-white md:ml-[258px] px-4 py-4 flex justify-between items-center shadow sticky top-0 z-30">
       <div className="flex items-center gap-4">
         {/* Hamburger toggle button */}
         <button onClick={toggleSidebar} className="md:hidden text-white hover:text-purple-300">
@@ -158,3 +158,6 @@ export default function Navbar({ setCurrentView, toggleSidebar }) {
     </nav>
   );
 }
+
+
+

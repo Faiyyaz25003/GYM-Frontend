@@ -4,12 +4,12 @@ import React, { useState } from 'react';
 import {
   LogOut, User, Users, Calendar, ClipboardList,
   BarChart3, Dumbbell, Phone, Info, UserCircle,
-  Trophy, Utensils, BookOpen, ChevronDown, ChevronUp
+  Trophy, Utensils, BookOpen, ChevronDown, ChevronUp, X
 } from 'lucide-react';
 
-const Sidebar = ({ currentView, setCurrentView, user, isSidebarOpen }) => {
+const Sidebar = ({ currentView, setCurrentView, user, isSidebarOpen, closeSidebar }) => {
   const [isDietOpen, setIsDietOpen] = useState(false);
-  const [isAttendanceOpen, setIsAttendanceOpen] = useState(false); // NEW STATE
+  const [isAttendanceOpen, setIsAttendanceOpen] = useState(false);
 
   const adminMenuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: <BarChart3 size={18} /> },
@@ -58,7 +58,7 @@ const Sidebar = ({ currentView, setCurrentView, user, isSidebarOpen }) => {
     { id: 'diet', label: 'Diet', icon: <ClipboardList size={18} /> },
     { id: 'dietReference', label: 'Diet Reference', icon: <BookOpen size={18} /> },
     { id: 'excersizeReference', label: 'Excersize Reference', icon: <BookOpen size={18} /> },
-     { id: 'attandence', label: 'Mark Attendance', icon: <UserCircle size={16} /> },
+    { id: 'attandence', label: 'Mark Attendance', icon: <UserCircle size={16} /> },
     { id: 'user-profile', label: 'User Profile', icon: <UserCircle size={18} /> },
   ];
 
@@ -66,24 +66,27 @@ const Sidebar = ({ currentView, setCurrentView, user, isSidebarOpen }) => {
 
   return (
     <div
-      className={`fixed top-0 left-0 h-full w-64 bg-gradient-to-b from-[#0f172a] to-[#1e293b] shadow-lg z-40 transform transition-transform duration-300 ease-in-out
+      className={`fixed top-0 left-0 h-full w-64 bg-gradient-to-b from-[#0f172a] to-[#1e293b] shadow-lg z-50 transform transition-transform duration-300 ease-in-out
         ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}
     >
-      {/* Header */}
-      <div className="p-2 border-b border-white/10 bg-gradient-to-r from-[#0f172a] to-[#1e293b]">
-        <div className="flex items-center gap-1 py-1">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-yellow-400 to-pink-500 flex items-center justify-center shadow-lg">
-            <span className="text-white text-xl animate-bounce">🏋️‍♂️</span>
+      {/* Header with Close Button (mobile only) */}
+      <div className="flex justify-between items-center p-3 border-b border-white/10 bg-gradient-to-r from-[#0f172a] to-[#1e293b]">
+        <div className="flex items-center gap-2">
+          <div className="w-[42px] h-[42px] rounded-lg bg-gradient-to-br from-yellow-400 to-pink-500 flex items-center justify-center shadow-lg">
+            <span className="text-white text-2xl">🏋️‍♂️</span>
           </div>
-          <div>
-            <h1 className="text-base font-bold text-white tracking-wide leading-tight">FitTrack</h1>
-            <p className="text-[10px] text-purple-300 font-medium leading-none">Gym Management System</p>
-          </div>
+          <h1 className="text-lg font-bold text-white">FitTrack</h1>
         </div>
+        <button
+          className="text-white md:hidden hover:text-red-400 transition"
+          onClick={closeSidebar}
+        >
+          <X size={24} />
+        </button>
       </div>
 
-      {/* Menu */}
-      <nav className="p-3 flex flex-col gap-1">
+      {/* Scrollable Menu */}
+      <nav className="p-3 flex flex-col gap-1 overflow-y-auto max-h-[calc(100%-60px)]">
         {menuToShow.map((item) =>
           item.isDropdown && user?.role === 'admin' ? (
             <div key={item.id} className="flex flex-col">
@@ -112,7 +115,10 @@ const Sidebar = ({ currentView, setCurrentView, user, isSidebarOpen }) => {
                   {item.children.map((child) => (
                     <button
                       key={child.id}
-                      onClick={() => setCurrentView(child.id)}
+                      onClick={() => {
+                        setCurrentView(child.id);
+                        closeSidebar();
+                      }}
                       className={`flex items-center gap-2 p-2 pl-3 rounded-lg text-sm font-medium transition-all duration-200
                         ${currentView === child.id
                           ? 'bg-purple-600 text-white shadow-inner'
@@ -128,7 +134,10 @@ const Sidebar = ({ currentView, setCurrentView, user, isSidebarOpen }) => {
           ) : (
             <button
               key={item.id}
-              onClick={() => setCurrentView(item.id)}
+              onClick={() => {
+                setCurrentView(item.id);
+                closeSidebar();
+              }}
               className={`flex items-center gap-2 p-2.5 rounded-xl text-sm font-medium transition-all duration-200
                 ${currentView === item.id
                   ? 'bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-inner'
