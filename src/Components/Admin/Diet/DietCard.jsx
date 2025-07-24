@@ -1,23 +1,3 @@
-// import React from 'react';
-
-// const DietCard = ({ diet }) => {
-//   return (
-//     <div className="border border-gray-300 rounded-md p-4 m-2 shadow-sm">
-//       <h4 className="font-bold text-lg mb-2">{diet.title}</h4>
-//       <p className="text-gray-700 mb-3">{diet.description}</p>
-//       <div className="text-sm text-gray-600">
-//         <strong>Assigned to:</strong> {
-//           diet.users && diet.users.length > 0
-//             ? `${diet.users.length} user(s): ${diet.users.map(user => user.name).join(', ')}`
-//             : 'No users assigned'
-//         }
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default DietCard;
-
 
 import React from 'react';
 import { Users, Clock, CheckCircle, Star } from 'lucide-react';

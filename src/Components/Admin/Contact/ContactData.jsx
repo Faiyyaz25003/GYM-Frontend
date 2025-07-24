@@ -8,7 +8,7 @@ const ContactData = () => {
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 6;
 
   const fetchContacts = async () => {
     setLoading(true);
