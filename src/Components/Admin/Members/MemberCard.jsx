@@ -1,6 +1,4 @@
 
-
-
 import React from 'react';
 import {
   Pencil,
@@ -10,6 +8,7 @@ import {
   MapPin,
   CalendarDays,
   UserCircle2,
+  Target,
 } from 'lucide-react';
 
 const MemberCard = ({ member, onEdit, onDelete }) => {
@@ -54,6 +53,14 @@ const MemberCard = ({ member, onEdit, onDelete }) => {
           <MapPin size={16} className="text-purple-500" />
           <span className="truncate">{member.address}</span>
         </p>
+         {/* Goal Field (NEW) */}
+        {member.goal && (
+          <p className="flex items-center gap-2">
+            <Target size={16} className="text-blue-600" />
+            Goal: <span className="font-medium">{member.goal}</span>
+          </p>
+        )}
+      </div>
         <p className="flex items-center gap-2">
           <CalendarDays size={16} className="text-green-600" />
           Joined: <span className="font-medium">{new Date(member.joinDate).toLocaleDateString()}</span>
@@ -62,7 +69,15 @@ const MemberCard = ({ member, onEdit, onDelete }) => {
           <CalendarDays size={16} className="text-red-600" />
           Ends: <span className="font-medium">{new Date(member.endDate).toLocaleDateString()}</span>
         </p>
-      </div>
+
+        {/* Goal Field (NEW)
+        {member.goal && (
+          <p className="flex items-center gap-2">
+            <Target size={16} className="text-blue-600" />
+            Goal: <span className="font-medium">{member.goal}</span>
+          </p>
+        )}
+      </div> */}
 
       {/* Action Buttons */}
       <div className="flex justify-center gap-4 mt-6">
