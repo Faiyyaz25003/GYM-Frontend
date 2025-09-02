@@ -151,7 +151,7 @@ import UserDetails from "../Admin/UserDetails/UserDetails";
 import Profile from "../Admin/Profile/Profile";
 import Acheivements from "../Admin/Acheivements/Acheivements";
 import DietManager from "../Admin/Diet/Diet";
-import UserDashboard from "../UserDashboard/USerDashboard";
+import UserDashboard from "../UserDashboard/UserDashboard";
 import Calculator from "../Admin/Calculator/Calculator";
 import Notification from "../Admin/Notification/Notification";
 import Expire from "../Admin/Expire/Expire";
