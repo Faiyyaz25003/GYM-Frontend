@@ -1,9 +1,9 @@
 import React from 'react'
-import Notification from '@/components/Notification';
+import Notification from '@/Components/Admin/Notification/Notification'
 const page = () => {
   return (
     <div>
-      <Notification/>
+     <Notification/>
     </div>
   )
 }
