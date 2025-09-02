@@ -1,11 +1,13 @@
+
+import Home from '@/Components/Home/Home';
 import React from 'react'
 
-import Login from '@/Components/Auth/Login';
+
 
 const page = () => {
   return (
     <div>
-      <Login/>
+    <Home/>
 
     </div>
   )

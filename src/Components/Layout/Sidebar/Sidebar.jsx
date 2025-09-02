@@ -19,8 +19,6 @@ const Sidebar = ({ currentView, setCurrentView, user, isSidebarOpen, closeSideba
     { id: 'members', label: 'Members', icon: <User size={18} /> },
     { id: 'expire', label: 'Expire Membership', icon: <User size={18} /> },
     { id: 'achievements', label: 'Achievements', icon: <Trophy size={18} /> },
-    { id: 'contact', label: 'Contact Us', icon: <Phone size={18} /> },
-    { id: 'about', label: 'About Us', icon: <Info size={18} /> },
     { id: 'schedule', label: 'Schedule', icon: <Calendar size={18} /> },
     { id: 'plans', label: 'My Plan', icon: <ClipboardList size={18} /> },
     {
@@ -51,8 +49,6 @@ const Sidebar = ({ currentView, setCurrentView, user, isSidebarOpen, closeSideba
     { id: 'dashboard', label: 'Dashboard', icon: <BarChart3 size={18} /> },
     { id: 'trainers', label: 'Trainers', icon: <Dumbbell size={18} /> },
     { id: 'schedule', label: 'Schedule', icon: <Calendar size={18} /> },
-    { id: 'contact', label: 'Contact Us', icon: <Phone size={18} /> },
-    { id: 'about', label: 'About Us', icon: <Info size={18} /> },
     { id: 'achievements', label: 'Achievements', icon: <Trophy size={18} /> },
     { id: 'plans', label: 'My Plan', icon: <ClipboardList size={18} /> },
     { id: 'diet', label: 'Diet', icon: <ClipboardList size={18} /> },
