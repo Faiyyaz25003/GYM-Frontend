@@ -137,7 +137,6 @@ import Trainee from '../Admin/Trainee/Trainee';
 import Schedule from '../Admin/Schedule/Schedule';
 import Plan from '../Admin/Plan/Plan';
 import About from '../Admin/About/About';
-import Contact from '../Admin/Contact/Contact';
 import Member from '../Admin/Members/Member';
 import ContactData from '../Admin/Contact/ContactData';
 import UserDetails from '../Admin/UserDetails/UserDetails';
@@ -200,7 +199,6 @@ export default function Home() {
         case 'trainers': return <Trainee />;
         case 'plans': return <Plan />;
         case 'about': return <About />;
-        case 'contact': return <Contact />;
         case 'achievements': return <Acheivements />;
         case 'user-profile': return <Profile />;
         case 'diet': return <DietManager />;
