@@ -61,61 +61,61 @@ export default function AdminDashboard() {
   }, []);
 
   // Real-time activity & inactivity
-  useEffect(() => {
-    const token = localStorage.getItem('token');
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
 
-    const setActiveStatus = async (status) => {
-      try {
-        await axios.post(`${BASE_URL}/api/auth/active`, { active: status, token });
-      } catch (err) {
-        console.error('Error updating user active status:', err);
-      }
-    };
+  //   const setActiveStatus = async (status) => {
+  //     try {
+  //       await axios.post(`${BASE_URL}/api/auth/active`, { active: status, token });
+  //     } catch (err) {
+  //       console.error('Error updating user active status:', err);
+  //     }
+  //   };
 
-    const handleActive = () => {
-      setActiveStatus(true);
-    };
+  //   const handleActive = () => {
+  //     setActiveStatus(true);
+  //   };
 
-    const handleInactive = () => {
-      setActiveStatus(false);
-    };
+  //   const handleInactive = () => {
+  //     setActiveStatus(false);
+  //   };
 
-    // Active events
-    window.addEventListener('mousemove', handleActive);
-    window.addEventListener('keydown', handleActive);
-    window.addEventListener('click', handleActive);
+  //   // Active events
+  //   window.addEventListener('mousemove', handleActive);
+  //   window.addEventListener('keydown', handleActive);
+  //   window.addEventListener('click', handleActive);
 
-    // Inactive events
-    window.addEventListener('blur', handleInactive);
-    window.addEventListener('mouseleave', handleInactive);
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'hidden') {
-        handleInactive();
-      }
-    });
+  //   // Inactive events
+  //   window.addEventListener('blur', handleInactive);
+  //   window.addEventListener('mouseleave', handleInactive);
+  //   document.addEventListener('visibilitychange', () => {
+  //     if (document.visibilityState === 'hidden') {
+  //       handleInactive();
+  //     }
+  //   });
 
-    // Tab close - use sendBeacon
-    window.addEventListener('beforeunload', () => {
-      if (!token) return;
-      const payload = JSON.stringify({ active: false, token });
-      navigator.sendBeacon(`${BASE_URL}/api/auth/active`, new Blob([payload], {
-        type: 'application/json'
-      }));
-    });
+  //   // Tab close - use sendBeacon
+  //   window.addEventListener('beforeunload', () => {
+  //     if (!token) return;
+  //     const payload = JSON.stringify({ active: false, token });
+  //     navigator.sendBeacon(`${BASE_URL}/api/auth/active`, new Blob([payload], {
+  //       type: 'application/json'
+  //     }));
+  //   });
 
-    // Start as active
-    handleActive();
+  //   // Start as active
+  //   handleActive();
 
-    return () => {
-      window.removeEventListener('mousemove', handleActive);
-      window.removeEventListener('keydown', handleActive);
-      window.removeEventListener('click', handleActive);
-      window.removeEventListener('blur', handleInactive);
-      window.removeEventListener('mouseleave', handleInactive);
-      document.removeEventListener('visibilitychange', handleInactive);
-      window.removeEventListener('beforeunload', handleInactive);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener('mousemove', handleActive);
+  //     window.removeEventListener('keydown', handleActive);
+  //     window.removeEventListener('click', handleActive);
+  //     window.removeEventListener('blur', handleInactive);
+  //     window.removeEventListener('mouseleave', handleInactive);
+  //     document.removeEventListener('visibilitychange', handleInactive);
+  //     window.removeEventListener('beforeunload', handleInactive);
+  //   };
+  // }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 py-8 px-4 md:px-8">
