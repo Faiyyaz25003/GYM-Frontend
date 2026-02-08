@@ -38,7 +38,7 @@ export default function Login() {
         position: "top-right",
         autoClose: 2000,
         onClose: () => {
-          router.push("/AdminDashboard");
+          router.push("/home");
         },
       });
     } catch (err) {
@@ -90,7 +90,7 @@ export default function Login() {
                 </svg>
               </div>
               <h1 className="text-3xl font-bold text-white mb-2">
-                Welcome Back
+                Welcome Back USer
               </h1>
               <p className="text-gray-400">
                 Sign in to continue your fitness journey
