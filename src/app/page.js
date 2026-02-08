@@ -1,6 +1,7 @@
 
-import Login from '@/Components/Authantication/Login/Login';
-import Home from '@/Components/Home/Home';
+
+import Nav from '@/Components/Landing-page/Nav/Nav';
+import Navbar from '@/Components/Landing-page/Navbar/Navbar';
 import React from 'react'
 
 
@@ -8,8 +9,8 @@ import React from 'react'
 const page = () => {
   return (
     <div>
-      {/* <Home/> */}
-      <Login/>
+      <Navbar/>
+      <Nav/>
     </div>
   )
 }
